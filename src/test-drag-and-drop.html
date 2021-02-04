@@ -24,25 +24,33 @@
 
 .border1
 {
-	border: 2px solid red;
+	border: 0px solid red;
 }
 
 .border2
 {
-	border: 2px solid blue;
+	border: 0px solid blue;
 }
 </style>
 </head>
 
 <body>
 
-<h1> Drag and Drop test </h1>
+<h1> Draggable and Resizable </h1>
+
+<!-- 
+
+TODO:
+- figure out abs and rel
+- centering totally messes this up. why? 
+
+--->
 
 <div id="waterDiv" class="border1" id="background">
 	<img id="waterImg" class="abs" src="images/water.png"/>
 
-	<div class="border2 abs" id="turtle">
-		<img src="images/turtle.png"/>
+	<div class="border2 abs" id="turtleDiv">
+		<img id="turtleImg" src="images/turtle.png"/>
 	</div>
 
 </div>
@@ -54,34 +62,70 @@
 <script>
 
 // TODO: 
-// * div should resize to fit contents?
-// * bound to parent ("layout") div
-// * display relative (x,y) in console while dragging
-
 // trying to do this through code
 // let bg = document.getElementById("background");
 // bg.style.backgroundImage = "url('images/water.png')";
 
-let turtle = $("#turtle");
-turtle.draggable();
 
 let waterDiv = $("#waterDiv")[0];
 let waterImg = $("#waterImg")[0];
-console.log(waterImg.width);
+
+console.log( $("#waterDiv").offset() );
+
+console.log(waterImg);
 waterDiv.style.width = waterImg.width + "px";
 waterDiv.style.height = waterImg.height + "px";
 
+
+// convention: variables starting with $ are jQuery objects
+let $water = $("#waterDiv");
+let $turtle = $("#turtleDiv");
+
+$turtle.draggable({
+	containment: $water,
+	drag: showData
+});
+
+let $turtleImg = $("#turtleImg");
+
+$turtleImg.resizable({
+	containment: $water,
+	aspectRatio: true,
+	handles: "se",
+	resize: showData
+});
+
+let $info = $("#info");
+
+// TODO: currently hardwired to turtle. make runnable from any instance.
+//   get jQuery object from parameters?
+
 function showData(event, ui)
 {
-	console.log("event data");
-	console.log(event);
-	console.log("ui");
-	console.log(ui);
-}
+	// console.log("event data");
+	// console.log(event);
+	// console.log("ui");
+	// console.log(ui);
 
-turtle.on("drag", showData );
+	let layoutOffset   = $water.offset();
+	let instanceOffset = $turtle.offset();
+		
+	let width  = Math.round( $turtle.width() );
+	let height = Math.round( $turtle.height() );
+
+	let x = Math.round( instanceOffset.left - layoutOffset.left ); //+ this.width/2);
+	let y = Math.round( instanceOffset.top  - layoutOffset.top  ); //+ this.height/2);
+
+	$info.text("x:" + x + " y:" + y + " w:" + width + " h:" + height);
+}
 
 </script>
 
 </body>
 </html>
+
+<!--
+
+	Notes:
+
+-->
