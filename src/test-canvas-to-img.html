@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Encoding -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootcamp Files -->
+    <link href="bootstrap-5.0.0-beta1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootcamp-css.css" rel="stylesheet">
+    <script src="bootstrap-5.0.0-beta1-dist/js/bootstrap.min.js"></script>
+
+    <title>Testing Canvas Stuff</title>
+
+    <style>
+      canvas {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+      }
+    </style>
+  </head>
+
+  <body id="body">
+    <canvas id="myCanvas" width="800" height="600" style="border:1px solid #000000;"></canvas>
+
+    <script>
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+
+      ctx.fillStyle = "#FF0000";
+      ctx.fillRect(325, 225, 150, 150);
+
+      var img = document.createElement('img');
+      img.src = c.toDataURL();
+
+      document.getElementById('body').appendChild(img);
+
+    </script>
+  </body>
+</html>
