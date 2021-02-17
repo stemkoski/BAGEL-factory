@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script src="jquery/jquery-3.3.1.js"></script>
+	<link rel="stylesheet" href="jquery/jquery-ui.css">
+	<script src="jquery/jquery-ui.js"></script>
+
+</head>
+
+<body>
+
+<h1> Opening Files </h1>
+
+<hr/>
+<button id="buttonOpenFile">Open File</button>
+<input type="file" id="inputOpenFile" accept=".jpg, .jpeg, .png" style="display: none;"> </input>
+<hr/>
+
+<script>
+
+var updateSpriteData = function(viewSprite, modelSprite)
+{
+	let parentOffset = viewSprite.$parent.offset();
+	let spriteOffset = viewSprite.$div.offset();
+
+	modelSprite.x = Math.round( spriteOffset.left - parentOffset.left );
+	modelSprite.y = Math.round( spriteOffset.top  - parentOffset.top  );
+
+	modelSprite.width  = Math.round( viewSprite.$div.width() );
+	modelSprite.height = Math.round( viewSprite.$div.height() );
+
+	console.log("updated model sprite data")
+	console.log(modelSprite);
+}
+
+class ViewSprite
+{
+	constructor(imageElementId, parentElementId)
+	{
+		// related HTML elements
+		this.$parent = $("#" + parentElementId);
+		this.$image = $("#" + imageElementId);
+
+		// create HTML elements used iby this object
+		this.$div = $("<div style='position: absolute;'></div>");
+
+		this.$img = $("<img />");	
+		this.$img.attr("src", this.$image.attr("src") );
+		this.$img.attr("id", "asdf");
+
+		// add new elements to page
+		this.$parent.append( this.$div );
+		this.$div.append( this.$img );
+		
+		// linked model data
+		this.$modelSprite = new ModelSprite();
+		this.$modelSprite.imageName = imageElementId;
+
+		// add element functionality
+		this.$div.draggable({
+			containment: this.$parent, 
+			drag: (event, ui) => { updateSpriteData(this, this.$modelSprite); }
+		});
+
+		this.$img.resizable({
+			containment: this.$parent,
+			aspectRatio: true,
+			handles: "se",
+			resize: (event, ui) => { updateSpriteData(this, this.$modelSprite); }
+		});
+
+		console.log("created view sprite: " + imageElementId);
+	}
+
+}
+
+class View
+{
+	constructor()
+	{
+		this.viewSpriteList = [];
+		this.viewInstructionList = [];
+	}
+}
+
+class ModelSprite
+{
+	constructor()
+	{
+		this.x = null;
+		this.y = null;
+		this.width = null;
+		this.height = null;
+		this.imageName = null;
+	}
+}
+
+class Model
+{
+	constructor()
+	{
+		this.modelSpriteList = [];
+		this.modelInstructionList = [];
+	}
+}
+
+// ============================================================================
+
+// apply button style to all button objects
+$("button").button();
+
+// when input field points to a new file, load file
+var loadFile = function(inputEvent)
+{
+	let file = inputEvent.target.files[0];
+	let name = file.name;
+
+	// remove extension from file name
+	name = name.substr(0, name.lastIndexOf('.'));
+
+	let reader = new FileReader();
+	reader.addEventListener("load", 
+		readerEvent =>
+		{	
+			let img = $("<img style='display: none;' />");	
+			img.attr("src", readerEvent.target.result);
+			img.attr("id", name);
+			img.appendTo("body");
+		}
+	);
+	reader.readAsDataURL(file);
+}
+
+$("#inputOpenFile").on("change", loadFile );
+
+var openFile = function(event)
+{
+	$("#inputOpenFile").click();
+}
+
+$("#buttonOpenFile").on( "click", openFile );
+
+</script>
+
+<!-- page main content area -->
+<div id="layout" style="width:800px; height:600px; background-color: lightblue;"></div>
+<hr>
+<div id="info">(model info displays in JS console)</div>
+
+<!-- preload image data -->
+<img id='water' src='images/water.png' style='display: none;'/>
+<img id='turtle' src='images/turtle.png' style='display: none;'/>
+
+<script>
+// create view sprites
+let waterVSprite = new ViewSprite("water", "layout");
+let turtleVSprite = new ViewSprite("turtle", "layout");
+</script>
+
+</body>
+</html>
