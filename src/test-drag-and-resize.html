@@ -5,51 +5,20 @@
 	<script src="jquery/jquery-3.3.1.js"></script>
 	<link rel="stylesheet" href="jquery/jquery-ui.css">
 	<script src="jquery/jquery-ui.js"></script>
-
-<style>
-.abs
-{
-	position: absolute;
-}
-
-.rel
-{
-	position: relative;
-}
-
-.test
-{
-	display: inline-block;
-}
-
-.border1
-{
-	border: 0px solid red;
-}
-
-.border2
-{
-	border: 0px solid blue;
-}
-</style>
 </head>
 
 <body>
 
 <h1> Draggable and Resizable </h1>
+<hr/>
 
-<!-- 
+<div id="layout" style="width:800px; height:600px;">
+	
+	<div id="waterDiv" style="position:absolute;">
+		<img id="waterImg" src="images/water.png"/>
+	</div>
 
-TODO:
-- figure out abs and rel
-- centering totally messes this up. why? 
-
---->
-
-<div id="waterDiv" class="border1" id="background">
-	<img id="waterImg" class="abs" src="images/water.png"/>
-
-	<div class="border2 abs" id="turtleDiv">
+	<div id="turtleDiv"	style="position:absolute;">
 		<img id="turtleImg" src="images/turtle.png"/>
 	</div>
 
@@ -57,39 +26,23 @@ TODO:
 
 <hr>
 
-<div id="info">(info displays in JS console)</div>
+<div id="info">(info displays here)</div>
 
 <script>
 
-// TODO: 
-// trying to do this through code
-// let bg = document.getElementById("background");
-// bg.style.backgroundImage = "url('images/water.png')";
-
-
-let waterDiv = $("#waterDiv")[0];
-let waterImg = $("#waterImg")[0];
-
-console.log( $("#waterDiv").offset() );
-
-console.log(waterImg);
-waterDiv.style.width = waterImg.width + "px";
-waterDiv.style.height = waterImg.height + "px";
-
-
 // convention: variables starting with $ are jQuery objects
-let $water = $("#waterDiv");
+let $layout = $("#layout");
 let $turtle = $("#turtleDiv");
 
 $turtle.draggable({
-	containment: $water,
+	containment: $layout,
 	drag: showData
 });
 
 let $turtleImg = $("#turtleImg");
 
 $turtleImg.resizable({
-	containment: $water,
+	containment: $layout,
 	aspectRatio: true,
 	handles: "se",
 	resize: showData
@@ -97,24 +50,16 @@ $turtleImg.resizable({
 
 let $info = $("#info");
 
-// TODO: currently hardwired to turtle. make runnable from any instance.
-//   get jQuery object from parameters?
-
 function showData(event, ui)
 {
-	// console.log("event data");
-	// console.log(event);
-	// console.log("ui");
-	// console.log(ui);
-
-	let layoutOffset   = $water.offset();
+	let layoutOffset   = $layout.offset();
 	let instanceOffset = $turtle.offset();
 		
 	let width  = Math.round( $turtle.width() );
 	let height = Math.round( $turtle.height() );
 
-	let x = Math.round( instanceOffset.left - layoutOffset.left ); //+ this.width/2);
-	let y = Math.round( instanceOffset.top  - layoutOffset.top  ); //+ this.height/2);
+	let x = Math.round( instanceOffset.left - layoutOffset.left );
+	let y = Math.round( instanceOffset.top  - layoutOffset.top  );
 
 	$info.text("x:" + x + " y:" + y + " w:" + width + " h:" + height);
 }
@@ -123,9 +68,3 @@ function showData(event, ui)
 
 </body>
 </html>
-
-<!--
-
-	Notes:
-
--->
