@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script src="jquery/jquery-3.3.1.js"></script>
+	<link rel="stylesheet" href="jquery/jquery-ui.css">
+	<script src="jquery/jquery-ui.js"></script>
+
+	<!-- plugin for right-click context menu -->
+	<script src="jquery/jquery.ui-contextmenu.js"></script>
+	
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<h1> Test Context Menu </h1>
+<hr/>
+
+<p>Default page area. Right click to activate custom pop-up context menu.
+Menu contents should change depending on region clicked.</p>
+
+<div style="width:800px; height:400px; 
+			position:absolute; background-color: #FF8888;"
+	 class="redBox">
+	Outer Div.
+	<div style="left:100px; width:200px; height:200px; 
+				position:absolute; background-color: #8888FF;"
+		class="blueBox">
+		Inner Div.
+	</div>
+
+	<div style="left:400px; width:200px; height:200px; 
+				position:absolute; background-color: #8888FF;"
+		class="blueBox">
+		Another Inner Div.
+	</div>
+</div>
+<hr/>
+
+<script type="text/javascript">
+	
+// selector specifies which elements can be clicked on to open menu
+// ui-icon custom-zzzz defined in style.css
+
+$("body").contextmenu({
+	delegate: "",
+	menu: [
+		{title: "Add Stuff",     cmd:"add",    uiIcon: "ui-icon custom-plus", children:
+		[
+			{title: "Good Stuff",  cmd:"none", uiIcon: "ui-icon custom-check"},
+			{title: "Great Stuff",  cmd:"none", uiIcon: "ui-icon custom-check"}
+		]},	
+		{title: "Delete Less than Good Stuff",  cmd:"delete", uiIcon: "ui-icon custom-cross"},
+		{title: "Red Box",       cmd:"redBox", uiIcon: "ui-icon custom-red"},
+		{title: "Blue Box",      cmd:"blueBox", uiIcon: "ui-icon custom-blue"}
+		
+	],
+	beforeOpen: function(event, ui) 
+	{
+		let $closest = ui.target.closest().prevObject;
+
+		let redBoxClicked  = $closest.hasClass("redBox");
+		let blueBoxClicked = $closest.hasClass("blueBox");
+
+		// show/hide menu items		
+		$("body").contextmenu("showEntry", "redBox", redBoxClicked);
+		$("body").contextmenu("showEntry", "blueBox", blueBoxClicked);
+
+		// enable/disable menu items
+		// $("body").contextmenu("enableEntry", "redBox", redBoxClicked);
+		// $("body").contextmenu("enableEntry", "blueBox", blueBoxClicked);
+
+		if ( redBoxClicked )
+		{
+			console.log("red box clicked!");
+		}
+
+		if ( blueBoxClicked )
+		{
+			console.log("blue box clicked!");
+		}
+
+		// guarantee that it appears on top, but under widget overlay (z-index 100)
+		ui.menu.css( "zIndex", 99 ); 
+	},
+
+	select : function(event, ui)
+	{
+		if ( ui.cmd == "add" )
+		{
+			console.log("clicked add");
+		}
+		else if ( ui.cmd == "delete" )
+		{
+			console.log("clicked delete");
+		}
+	}
+
+});
+
+</script>
+</body>
+</html>
