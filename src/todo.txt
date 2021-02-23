@@ -1,0 +1,16 @@
+
+three tab:
+
+- layout
+
+--- colorpicker; stores picked color in "Model" object
+
+- code (text area, not editable)
+
+--- display picked color from Model as Hex in textarea
+
+- game (canvas)
+
+--- render canvas (800x600) using model color as background.
+--- loop that runs 60 times per second; activated when this tab active, stops when another tab is clicked. within the loop, 
+somehow refers to color, extracted from model data
