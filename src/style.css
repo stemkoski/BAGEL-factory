@@ -1,0 +1,30 @@
+
+/* context menu icons */
+.ui-menu { width: auto; white-space:nowrap; }
+.ui-menu-item { padding: 4px; }
+.ui-icon.custom-plus       { background-image: url(images/icons/plus.png); }
+.ui-icon.custom-pencil     { background-image: url(images/icons/pencil.png); }
+.ui-icon.custom-cross      { background-image: url(images/icons/cross.png); }
+.ui-icon.custom-rotate     { background-image: url(images/icons/rotate.png); }
+.ui-icon.custom-visibility { background-image: url(images/icons/visibility.png); }
+.ui-icon.custom-photo      { background-image: url(images/icons/photo.png); }
+.ui-icon.custom-text       { background-image: url(images/icons/text.png); }
+.ui-icon.custom-input      { background-image: url(images/icons/input.png); }
+.ui-icon.custom-palette    { background-image: url(images/icons/palette.png); }
+.ui-icon.custom-updown     { background-image: url(images/icons/updown.png); }
+.ui-icon.custom-gear       { background-image: url(images/icons/gear.png); }
+.ui-icon.custom-add        { background-image: url(images/icons/add.png); }
+.ui-icon.custom-delete     { background-image: url(images/icons/delete.png); }
+.ui-icon.custom-wrench     { background-image: url(images/icons/wrench.png); }
+.ui-icon.custom-code       { background-image: url(images/icons/code.png); }
+.ui-icon.custom-variable   { background-image: url(images/icons/variable.png); }
+.ui-icon.custom-check      { background-image: url(images/icons/check.png); }
+.ui-icon.custom-play       { background-image: url(images/icons/play.png); }
+.ui-icon.custom-stop       { background-image: url(images/icons/stop.png); }
+
+.ui-icon.custom-red        { background-image: url(images/icons/circle_red.png); }
+.ui-icon.custom-orange     { background-image: url(images/icons/circle_orange.png); }
+.ui-icon.custom-yellow     { background-image: url(images/icons/circle_yellow.png); }
+.ui-icon.custom-green      { background-image: url(images/icons/circle_green.png); }
+.ui-icon.custom-blue       { background-image: url(images/icons/circle_blue.png); }
+.ui-icon.custom-purple     { background-image: url(images/icons/circle_purple.png); }

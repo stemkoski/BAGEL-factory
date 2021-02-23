@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script src="jquery/jquery-3.3.1.js"></script>
+	<link rel="stylesheet" href="jquery/jquery-ui.css">
+	<script src="jquery/jquery-ui.js"></script>
+</head>
+<style>
+.ui-widget-overlay.modal-opened{
+  background: rgb(0, 0, 0);
+  opacity: 0.5;
+  filter: Alpha(Opacity=50);         
+}
+</style>
+<body>
+
+<h1> Model Dialog Window </h1>
+<hr/>
+
+<button id="buttonOpenDialog">Open Dialog</button>
+
+<!-- used to create dialog window -->
+<div id="dialogDiv">
+	<p>Hello, world.</p>
+</div>
+
+<hr/>
+
+<script>
+
+let $dialog = $("#dialogDiv");
+
+let $stuff = $("<p> Dynamically added text. </p>");
+
+$dialog.append( $stuff );
+
+
+// apply dialog functionality to element
+
+$dialog.dialog({
+	title: "Dialog Title",
+	autoOpen: false,
+	modal: true,
+	show: { effect: "fade", duration: 500 },
+	buttons: [
+		{
+			id: "dialogButtonSelect",
+			"class": "select-button", // not currently used
+			text: "Click Here First",
+			disabled: false,
+			click: function() 
+			{
+				console.log("You Clicked the Button");
+				let $stuff2 = $("<p> Now You May Close </p>");
+				$dialog.append( $stuff2 );
+				$("#dialogButtonClose").button("enable");
+			}
+		},
+		{
+			text: "Close",
+			id: "dialogButtonClose",
+			disabled: true,
+			click: function() 
+			{	
+				$(this).dialog( "close" ); 
+			}
+		}
+	],
+	open: function (event, ui) {
+            $(".ui-widget-overlay").addClass('modal-opened');
+        },
+        close: function(event, ui){
+          $(".ui-widget-overlay").removeClass('modal-opened');
+        }
+});
+
+// button functionality
+$("#buttonOpenDialog").button();
+
+var openDialog = function()
+{
+	let $dialog = $("#dialogDiv");
+	$dialog.dialog( "option", "position", 
+		{ my: "center", at: "center", of: window } );
+	$dialog.dialog( "open" );
+}
+
+$("#buttonOpenDialog").on( "click", openDialog );
+
+	/** TODO: can you set position as a function to alleviate need for following line?
+	$selectObjectDialog.dialog( "option", "position", { my: "center", at: "center", of: window } );
+	$selectObjectDialog.dialog( "open" ); */
+</script>
+
+</body>
+</html>
