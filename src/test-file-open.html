@@ -14,6 +14,7 @@
 
 <hr/>
 <button id="buttonOpenFile">Open File</button>
+
 <input type="file" id="inputOpenFile" accept=".jpg, .jpeg, .png" style="display: none;"> </input>
 <hr/>
 
@@ -30,7 +31,7 @@ var updateSpriteData = function(viewSprite, modelSprite)
 	modelSprite.width  = Math.round( viewSprite.$div.width() );
 	modelSprite.height = Math.round( viewSprite.$div.height() );
 
-	console.log("updated model sprite data")
+	console.log("updated model sprite data");
 	console.log(modelSprite);
 }
 
@@ -53,21 +54,30 @@ class ViewSprite
 		this.$parent.append( this.$div );
 		this.$div.append( this.$img );
 		
-		// linked model data
+		// link to model data
 		this.$modelSprite = new ModelSprite();
+		// set image name
 		this.$modelSprite.imageName = imageElementId;
+		// set other values
+		updateSpriteData(this, this.$modelSprite);
 
 		// add element functionality
 		this.$div.draggable({
 			containment: this.$parent, 
-			drag: (event, ui) => { updateSpriteData(this, this.$modelSprite); }
+			drag: (event, ui) => 
+			{ 
+				updateSpriteData(this, this.$modelSprite);
+			}
 		});
 
 		this.$img.resizable({
 			containment: this.$parent,
-			aspectRatio: true,
+			aspectRatio: false,
 			handles: "se",
-			resize: (event, ui) => { updateSpriteData(this, this.$modelSprite); }
+			resize: (event, ui) => 
+			{ 
+				updateSpriteData(this, this.$modelSprite); 
+			}
 		});
 
 		console.log("created view sprite: " + imageElementId);
@@ -105,6 +115,15 @@ class Model
 	}
 }
 
+let exportCode = function(model)
+{
+	let code = "";
+	for (modelSprite in model)
+	{
+		code += "new Sprite()"
+	}
+
+}
 // ============================================================================
 
 // apply button style to all button objects
