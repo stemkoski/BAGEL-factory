@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script src="jquery/jquery-3.3.1.js"></script>
+	<link rel="stylesheet" href="jquery/jquery-ui.css">
+	<script src="jquery/jquery-ui.js"></script>
+
+	<script src="factory/View.js"></script>
+	<script src="factory/ViewSprite.js"></script>
+	<script src="factory/Model.js"></script>
+	<script src="factory/ModelSprite.js"></script>
+
+	<style>
+
+	textarea
+	{
+		background-color: #FFFFFF;
+		font-family: monospace;
+		border: solid 2px black; 
+		width: 95%;
+	}
+
+	textarea:disabled /* needed, otherwise resizes to content */
+	{
+		width: 95%;
+	}
+
+	</style>
+
+</head>
+
+<body>
+
+<h1> Creating Sprites </h1>
+
+<hr/>
+
+<button id="buttonLoadImage">Load Image File</button>
+
+<input type="file" id="inputOpenFile" accept=".jpg, .jpeg, .png" style="display: none;"> </input>
+
+<button id="buttonCreateSprite">Create Sprite</button>
+
+<!-- preloaded sample image data (hidden) -->
+<img id='ball' src='images/ball.png' style='display: none;'/>
+
+Loaded image files: 
+<select id="spriteNames">
+	<option selected>ball</option>
+</select>
+
+<button id="buttonExportCode">Export Code</button>
+
+<hr/>
+<div id="layout" style="width:800px; height:600px; background-color: lightblue;"></div>
+<hr/>
+
+<hr/>
+<textarea id="codeArea" rows="10">print("Hello, world!");</textarea>
+<hr/>
+
+<script>
+
+// ============================================================================
+
+let view = new View();
+
+// apply jQuery style to corresponding element types
+$("button").button();
+$("select").selectmenu();
+
+// when input field points to a new file, load file
+$("#inputOpenFile").on("change",
+	(inputEvent) =>
+	{
+		let file = inputEvent.target.files[0];
+		let name = file.name;
+
+		// remove extension from file name
+		name = name.substr(0, name.lastIndexOf('.'));
+
+		let reader = new FileReader();
+		reader.addEventListener("load", 
+			readerEvent =>
+			{	
+				// store image in new hidden element
+				let img = $("<img style='display: none;' />");	
+				img.attr("src", readerEvent.target.result);
+				img.attr("id", name);
+				img.appendTo("body");
+
+				// add image name to select list
+				let option = $("<option></option>");
+				option.text( name );
+				$("#spriteNames").append( option );
+			}
+		);
+		reader.readAsDataURL(file);
+	}
+);
+
+$("#buttonLoadImage").on( "click",
+	(event, ui) =>
+	{
+		$("#inputOpenFile").click();
+	}
+);
+
+$("#buttonCreateSprite").on( "click", 
+	(event, ui) =>
+	{
+		let imageID = $("#spriteNames option:selected").text();
+		view.createSprite(imageID, "layout");
+	}
+);
+
+$("#buttonExportCode").on( "click", 
+	(event, ui) =>
+	{
+		let code = view.model.exportCode();
+		$("#codeArea").text( code );
+	}
+);
+
+</script>
+</body>
+</html>
