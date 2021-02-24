@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+	<script src="jquery/jquery-3.3.1.js"></script>
+	<link rel="stylesheet" href="jquery/jquery-ui.css">
+	<script src="jquery/jquery-ui.js"></script>
+
+	<!-- classes implementing the BAGEL API -->
+	<script src="bagel/Vector.js"></script>
+	<script src="bagel/Rectangle.js"></script>
+	<script src="bagel/Texture.js"></script>
+	<script src="bagel/Entity.js"></script>
+	<script src="bagel/Sprite.js"></script>
+	<script src="bagel/Group.js"></script>
+	<script src="bagel/Game.js"></script>
+
+</head>
+
+<body>
+
+<h1> Starfish Collector 0.0 (sprites only) </h1>
+
+<!-- image files required -->
+<img id='water' src='images/water.png' style='display: none;'/>
+<img id='turtle' src='images/turtle.png' style='display: none;'/>
+
+<script>
+
+class StarfishCollector extends Game
+{
+	create()
+	{
+		this.ocean = new Sprite();
+		this.ocean.setTexture( new Texture("water", 800,600) );
+		this.ocean.setPosition(400,300);
+		this.ocean.setSize(800,600);
+		this.group.add(this.ocean);
+
+		this.turtle = new Sprite();
+		this.turtle.setTexture( new Texture("turtle", 96,96) );
+		this.turtle.setPosition(100,100);
+		this.turtle.setSize(96,96);
+		this.group.add(this.turtle);
+	}
+
+	update()
+	{
+
+	}
+}
+
+let game = new StarfishCollector(800,600);
+
+game.run();
+
+</script>
+
+</body>
+</html>
