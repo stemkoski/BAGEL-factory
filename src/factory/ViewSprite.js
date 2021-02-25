@@ -11,6 +11,7 @@ class ViewSprite
 
 		this.$img = $("<img />");	
 		this.$img.attr("src", this.$image.attr("src") );
+		// TODO: why?!?!?!?!?
 		this.$img.attr("id", "asdf");
 
 		// add new elements to page

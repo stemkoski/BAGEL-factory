@@ -17,7 +17,7 @@ class ModelSprite
 		code += `let ${this.imageName}Sprite = new Sprite(); \n`;
 		code += `${this.imageName}Sprite.setTexture(???); \n`;
 		code += `${this.imageName}Sprite.setPosition( ${this.x}, ${this.y} ); \n`;
-		code += `${this.imageName}Sprite.setTexture( ${this.width}, ${this.height} ); \n`;
+		code += `${this.imageName}Sprite.setSize( ${this.width}, ${this.height} ); \n`;
 		
 
 		return code;

@@ -44,6 +44,7 @@ class Sprite extends Entity
 	{
 		
 		context.setTransform(1,0, 0,1, this.position.x, this.position.y);
+		
 		// image, 4 source parameters, 4 destination parameters
         context.drawImage(this.texture.imageElement, 
             this.texture.region.left, this.texture.region.top, 
