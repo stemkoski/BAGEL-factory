@@ -1,0 +1,18 @@
+.ui-menubar 
+{
+	display: block; 
+	background-color: #CCCCFF; 
+	padding: 2px; 
+}
+
+.ui-menubar > li 
+{ 
+	display: inline-block; 
+}
+
+.ui-menubar li 
+{ 
+	white-space: nowrap; 
+}
+
+
