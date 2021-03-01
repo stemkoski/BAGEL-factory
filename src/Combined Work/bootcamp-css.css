@@ -1,0 +1,43 @@
+.nav-pills {
+    margin: 0 auto;
+    padding: 0;
+    width: 400px;
+}
+
+body {
+  background-color: #363636;
+  color: #fff;
+}
+
+ul {
+  list-style-type: none;
+}
+
+label {
+  text-align: center;
+}
+
+#canvasPanel {
+  /* Align Canvas to Center */
+  margin: 50px auto;
+  text-align: center;
+}
+
+#sliderDiv {
+  margin: 50px auto;
+  text-align: center;
+}
+
+.c-slider {
+  width: 300px;
+}
+
+#myCanvas {
+  /* Size of Canvas */
+  width: 800px;
+  height: 600px;
+  background-color: #ffffff;
+
+  /* Border around the Canvas */
+  border: 1px solid black;
+}

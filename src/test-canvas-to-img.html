@@ -17,7 +17,17 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        width: 40%;
+        /*width: 40%;*/
+      }
+
+      input {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      div {
+        text-align: center;
       }
     </style>
   </head>
@@ -25,17 +35,83 @@
   <body id="body">
     <canvas id="myCanvas" width="800" height="600" style="border:1px solid #000000;"></canvas>
 
+    <div id="rgb">
+      <input type="number" id="red" class="color" name="Red" min="0" max="255" value="0" oninput='changeColor()'>
+      <input type="number" id="blue" class="color" name="Blue" min="0" max="255" value="0" oninput='changeColor()'>
+      <input type="number" id="green" class="color" name="Green" min="0" max="255" value="0" oninput='changeColor()'>
+    </div>
+
     <script>
+      window.addEventListener('load', ()=>{
+      document.addEventListener('mousedown', initiatePaint);
+      document.addEventListener('mouseup', stopPaint);
+      document.addEventListener('mousemove', paintInProgress);
+
+    });
+
+      // Store the canvas and context in variables
       var c = document.getElementById("myCanvas");
       var ctx = c.getContext("2d");
 
+      // Get RBG Elements
+      var r = document.getElementById("red").value;
+      var g = document.getElementById("blue").value;
+      var b = document.getElementById("green").value;
+
+
+      // Fill to give the canvas a background
       ctx.fillStyle = "#FF0000";
-      ctx.fillRect(325, 225, 150, 150);
 
-      var img = document.createElement('img');
-      img.src = c.toDataURL();
+      // Stores initial cursor position
+      let coord = {x:0, y:0};
 
-      document.getElementById('body').appendChild(img);
+      // Flag for if we're drawing or // not
+      let paint = false;
+
+      function changeColor(){
+        ctx.fillStyle = 'rgb(r, g, b)';
+      }
+
+      // Update Cursor position
+      function getPosition(event){
+        coord.x = event.clientX - c.offsetLeft;
+        coord.y = event.clientY - c.offsetTop;
+      }
+
+      // Flag - to paint or not to paint
+      function initiatePaint(event){
+        paint=true;
+        getPosition(event);
+      }
+
+      function stopPaint(){
+        paint=false;
+      }
+
+      function paintInProgress(event){
+        if(!paint) return;
+        ctx.beginPath()
+        ctx.lineWidth=5;
+
+        // Rounded lines
+        ctx.lineCap = 'round';
+        ctx.moveTo(coord.x, coord.y);
+        getPosition(event);
+        ctx.lineTo(coord.x, coord.y);
+        ctx.stroke();
+      }
+
+
+
+
+
+
+
+
+
+      //var img = document.createElement('img');
+      //img.src = c.toDataURL();
+      //document.getElementById('body').appendChild(img);
 
     </script>
   </body>

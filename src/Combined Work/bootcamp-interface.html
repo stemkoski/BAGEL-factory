@@ -6,9 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootcamp Files -->
-    <link href="bootstrap-5.0.0-beta1-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap-5.0.0-beta1-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bootcamp-css.css" rel="stylesheet">
-    <script src="bootstrap-5.0.0-beta1-dist/js/bootstrap.min.js"></script>
+    <script src="../bootstrap-5.0.0-beta1-dist/js/bootstrap.min.js"></script>
+
+    <!-- JQuery Files -->
+    <script src="../jquery/jquery-3.3.1.js"></script>
+  	<link rel="stylesheet" href="../jquery/jquery-ui.css">
+  	<script src="../jquery/jquery-ui.js"></script>
+
+    <!-- BAGEL FACTORY API -->
+    <script src="../bagel/Vector.js"></script>
+  	<script src="../bagel/Rectangle.js"></script>
+  	<script src="../bagel/Texture.js"></script>
+  	<script src="../bagel/Entity.js"></script>
+  	<script src="../bagel/Sprite.js"></script>
+  	<script src="../bagel/Group.js"></script>
+  	<script src="../bagel/Game.js"></script>
+
+    <!-- Joe's Scripting Hellhole -->
+    <script src="interface-script.js"></script>
 
     <title>B.A.G.E.L Factory</title>
   </head>
@@ -49,7 +66,7 @@
     <div class="tab-content" id="pills-tabContent">
       <!-- Visual Game Design Content -->
       <div class="tab-pane fade show active" id="pills-world" role="tabpanel" aria-labelledby="pills-world-tab">
-        ...
+        <span>World Tab</span>
       </div>
 
       <!-- Instruction Sheet Content -->
@@ -66,7 +83,12 @@
 
       <!-- Show Game / Debug Tab -->
       <div class="tab-pane fade" id="pills-debug" role="tabpanel" aria-labelledby="pills-debug-tab">
-        ...
+        <div id="canvasPanel">
+          <!-- Copied from Starfish Collector -->
+          <!-- Required Images -->
+          <img id='water' src='../images/water.png' style='display: none;'/>
+          <img id='turtle' src='../images/turtle.png' style='display: none;'/>
+        </div>
       </div>
     </div>
 
