@@ -2,7 +2,7 @@ class Game
 {
 	// can use divID to create game within a pre-existing div element
 	// if divID is null, a new div will be created
-	constructor(width, height, canvasID=null)
+	constructor(width, height, divID=null)
 	{
 		this.width = width;
 		this.height = height;
