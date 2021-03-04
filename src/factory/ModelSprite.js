@@ -7,6 +7,8 @@ class ModelSprite
 		this.width = null;
 		this.height = null;
 		this.imageName = null;
+		this.imageHeight = null;
+		this.imageWidth = null;
 	}
 
 	exportCode()
@@ -15,10 +17,11 @@ class ModelSprite
 
 		// using Javascript "template literal" syntax
 		code += `let ${this.imageName}Sprite = new Sprite(); \n`;
-		code += `${this.imageName}Sprite.setTexture(???); \n`;
+		code += `let ${this.imageName}Texture = new Texture("${this.imageName}"); \n`;
+		code += `${this.imageName}Sprite.setTexture(${this.imageName}Texture, ${this.imageWidth},${this.imageHeight}); \n`;
 		code += `${this.imageName}Sprite.setPosition( ${this.x}, ${this.y} ); \n`;
 		code += `${this.imageName}Sprite.setSize( ${this.width}, ${this.height} ); \n`;
-		
+
 
 		return code;
 	}

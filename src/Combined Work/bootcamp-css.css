@@ -17,6 +17,14 @@ label {
   text-align: center;
 }
 
+textarea
+{
+  background-color: #FFFFFF;
+  font-family: monospace;
+  border: solid 2px black;
+  width: 95%;
+}
+
 #canvasPanel {
   /* Align Canvas to Center */
   margin: 50px auto;

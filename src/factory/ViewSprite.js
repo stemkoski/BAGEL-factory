@@ -9,7 +9,7 @@ class ViewSprite
 		// create HTML elements used iby this object
 		this.$div = $("<div style='position: absolute;'></div>");
 
-		this.$img = $("<img />");	
+		this.$img = $("<img />");
 		this.$img.attr("src", this.$image.attr("src") );
 		// TODO: why?!?!?!?!?
 		this.$img.attr("id", "asdf");
@@ -17,19 +17,21 @@ class ViewSprite
 		// add new elements to page
 		this.$parent.append( this.$div );
 		this.$div.append( this.$img );
-		
+
 		// link to model data
 		this.modelSprite = new ModelSprite();
 		// set image name
 		this.modelSprite.imageName = imageElementId;
+		this.modelSprite.imageWidth = this.$image[0].naturalWidth;
+		this.modelSprite.imageHeight = this.$image[0].naturalHeight;
 		// set other values
 		this.updateModelData();
 
 		// add element functionality
 		this.$div.draggable({
-			containment: this.$parent, 
-			drag: (event, ui) => 
-			{ 
+			containment: this.$parent,
+			drag: (event, ui) =>
+			{
 				this.updateModelData();
 			}
 		});
@@ -38,9 +40,9 @@ class ViewSprite
 			containment: this.$parent,
 			aspectRatio: false,
 			handles: "se",
-			resize: (event, ui) => 
-			{ 
-				this.updateModelData(); 
+			resize: (event, ui) =>
+			{
+				this.updateModelData();
 			}
 		});
 
