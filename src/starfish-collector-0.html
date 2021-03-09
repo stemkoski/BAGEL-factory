@@ -36,22 +36,40 @@ class StarfishCollector extends Game
 	{
 
 		this.waterGroup = new Group();
-		this.waterTexture = new Texture("water", 800, 600);
+		let waterTexture = new Texture("water", 800, 600);
 		for (let i = 0; i < 1; i++)
 		{
 			let waterSprite = new Sprite();
-			waterSprite.setTexture( new Texture("water", 800,600) );
+			waterSprite.setTexture( waterTexture );
 			waterSprite.setPosition(400,300);
 			waterSprite.setSize(800,600);
+			this.waterGroup.add(waterSprite);
 		}
-		
 		this.group.add(this.waterGroup);
 
-		this.turtle = new Sprite();
-		this.turtle.setTexture( new Texture("turtle", 96,96) );
-		this.turtle.setPosition(100,100);
-		this.turtle.setSize(96,96);
-		this.group.add(this.turtle);
+		this.turtleGroup = new Group();
+		let turtleTexture = new Texture("turtle", 96, 96);
+		for (let i = 0; i < 1; i++)
+		{
+			let turtleSprite = new Sprite();
+			turtleSprite.setTexture( turtleTexture );
+			turtleSprite.setPosition(150,100);
+			turtleSprite.setSize(80,80);
+			this.turtleGroup.add(turtleSprite);
+		}
+		this.group.add(this.turtleGroup);
+
+		this.starfishGroup = new Group();
+		let starfishTexture = new Texture("starfish", 96, 96);
+		for (let i = 0; i < 6; i++)
+		{
+			let starfishSprite = new Sprite();
+			starfishSprite.setTexture( starfishTexture );
+			starfishSprite.setPosition(Math.random()*600+100,Math.random()*400+100);
+			starfishSprite.setSize(80,80);
+			this.starfishGroup.add(starfishSprite);
+		}
+		this.group.add(this.starfishGroup);
 	}
 
 	update()
