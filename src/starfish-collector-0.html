@@ -25,6 +25,8 @@
 <!-- image files required -->
 <img id='water' src='images/water.png' style='display: none;'/>
 <img id='turtle' src='images/turtle.png' style='display: none;'/>
+<img id='starfish' src='images/starfish.png' style='display: none;'/>
+
 
 <script>
 
@@ -32,11 +34,18 @@ class StarfishCollector extends Game
 {
 	create()
 	{
-		this.ocean = new Sprite();
-		this.ocean.setTexture( new Texture("water", 800,600) );
-		this.ocean.setPosition(400,300);
-		this.ocean.setSize(800,600);
-		this.group.add(this.ocean);
+
+		this.waterGroup = new Group();
+		this.waterTexture = new Texture("water", 800, 600);
+		for (let i = 0; i < 1; i++)
+		{
+			let waterSprite = new Sprite();
+			waterSprite.setTexture( new Texture("water", 800,600) );
+			waterSprite.setPosition(400,300);
+			waterSprite.setSize(800,600);
+		}
+		
+		this.group.add(this.waterGroup);
 
 		this.turtle = new Sprite();
 		this.turtle.setTexture( new Texture("turtle", 96,96) );
