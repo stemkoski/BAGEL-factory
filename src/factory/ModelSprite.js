@@ -6,9 +6,8 @@ class ModelSprite
 		this.y = null;
 		this.width = null;
 		this.height = null;
+		// Image name is used to create group name
 		this.imageName = null;
-		this.imageHeight = null;
-		this.imageWidth = null;
 	}
 
 	exportCode()
@@ -17,10 +16,10 @@ class ModelSprite
 
 		// using Javascript "template literal" syntax
 		code += `let ${this.imageName}Sprite = new Sprite(); \n`;
-		code += `let ${this.imageName}Texture = new Texture("${this.imageName}"); \n`;
-		code += `${this.imageName}Sprite.setTexture(${this.imageName}Texture, ${this.imageWidth},${this.imageHeight}); \n`;
+		code += `${this.imageName}Sprite.setTexture(${this.imageName}Texture); \n`;
 		code += `${this.imageName}Sprite.setPosition( ${this.x}, ${this.y} ); \n`;
 		code += `${this.imageName}Sprite.setSize( ${this.width}, ${this.height} ); \n`;
+		code += `this.${this.imageName}Group.add(${this.imageName}Sprite); \n`
 
 
 		return code;

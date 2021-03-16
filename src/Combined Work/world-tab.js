@@ -28,6 +28,8 @@ $("#inputOpenFile").on("change",
 				let option = $("<option></option>");
 				option.text( name );
 				$("#spriteNames").append( option );
+				// Update Model
+				view.model.createGroup(name);
 			}
 		);
 		reader.readAsDataURL(file);

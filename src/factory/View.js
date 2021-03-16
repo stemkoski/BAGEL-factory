@@ -11,9 +11,10 @@ class View
 	createSprite(imageElementId, parentElementId)
 	{
 		let viewSprite = new ViewSprite(imageElementId, parentElementId);
-		
+
 		this.viewSpriteList.push( viewSprite );
 
-		this.model.modelSpriteList.push( viewSprite.modelSprite );
+		//this.model.modelSpriteList.push( viewSprite.modelSprite );
+		this.model.addSpriteToGroup( viewSprite.modelSprite );
 	}
 }

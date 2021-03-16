@@ -4,7 +4,6 @@ class Model
 	{
 		// ImageName -> List of Starfish Model Sprites
 		this.modelGroupSet = {};
-		this.modelSpriteList = [];
 		this.modelInstructionList = [];
 	}
 
@@ -23,20 +22,29 @@ class Model
 	exportCode()
 	{
 		let code = "";
+		console.log(this.modelGroupSet);
 		for (let groupName of this.modelGroupSet)
 		{
-			let spriteList = this.modelGroupSet[groupName];
-			code += `let ${groupName}Group = new Group();\n`;
+			let group = this.modelGroupSet[groupName];
+			code += group.exportCode();
 		}
 	}
 
-	addSpriteToGroup(groupName, spriteToGroup)
+	// Check for doubles later
+	createGroup(groupName, textureWidth, textureHeight)
 	{
-		if(!(groupName in this.modelGroupSet))
-		{
-			this.modelGroupSet[groupName] = [];
-		}
+		let someGroup = new ModelGroup();
+		someGroup.imageName = groupName;
+		someGroup.imageWidth = textureWidth;
+		someGroup.imageHeight = textureHeight;
 
-		this.modelGroupSet[groupName].push(spriteToGroup);
+		this.modelGroupSet[groupName] = someGroup;
+	}
+
+	addSpriteToGroup(sprite)
+	{
+		let groupName = sprite.imageName;
+		let group = this.modelGroupSet[groupName];
+		group.modelSpriteList.push(sprite);
 	}
 }
