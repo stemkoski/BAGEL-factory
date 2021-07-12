@@ -17,6 +17,7 @@ class ModelGroup
 		code += `let ${this.imageName}Texture = new Texture("${this.imageName}", ${this.imageWidth}, ${this.imageHeight}); \n`;
     for(let i = 0; i < this.modelSpriteList.length; i++)
     {
+      code += "\n";
       code += this.modelSpriteList[i].exportCode();
     }
 		code += `this.group.add(this.${this.imageName}Group); \n`;
