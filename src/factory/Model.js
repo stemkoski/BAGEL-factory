@@ -23,7 +23,7 @@ class Model
 	{
 		let code = "";
 		console.log(this.modelGroupSet);
-		for (let groupName of this.modelGroupSet)
+		for (let groupName of Object.keys(this.modelGroupSet) )
 		{
 			let group = this.modelGroupSet[groupName];
 			code += group.exportCode();
