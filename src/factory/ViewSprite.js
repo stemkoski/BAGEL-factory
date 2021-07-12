@@ -60,7 +60,7 @@ class ViewSprite
 		this.modelSprite.width  = Math.round( this.$div.width() );
 		this.modelSprite.height = Math.round( this.$div.height() );
 
-		console.log("updated model data");
-		console.log(this.modelSprite);
+		// console.log("updated model data");
+		// console.log(this.modelSprite);
 	}
 }
