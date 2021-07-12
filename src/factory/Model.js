@@ -28,6 +28,7 @@ class Model
 			let group = this.modelGroupSet[groupName];
 			code += group.exportCode();
 		}
+		return code;
 	}
 
 	// Check for doubles later
